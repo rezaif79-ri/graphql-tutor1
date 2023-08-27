@@ -7,14 +7,17 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/rezaif79-ri/hackernews/graph"
-	"github.com/rezaif79-ri/hackernews/graph/config/bun"
+	"github.com/joho/godotenv"
+	"github.com/rezaif79-ri/graphqltutor1/graph"
+	"github.com/rezaif79-ri/graphqltutor1/graph/config/bun"
 )
 
-const defaultPort = "8080"
+const defaultPort = "8081"
 
 func main() {
-	port := os.Getenv("PORT")
+	initEnv()
+
+	port := os.Getenv("APP_PORT")
 	if port == "" {
 		port = defaultPort
 	}
@@ -28,4 +31,10 @@ func main() {
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe("127.0.0.1:"+port, nil))
+}
+
+func initEnv() {
+	if os.Getenv("ENV") != "PRODUCTION" {
+		godotenv.Load("dev.env")
+	}
 }

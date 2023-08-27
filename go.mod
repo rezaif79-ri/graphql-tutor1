@@ -1,4 +1,4 @@
-module github.com/rezaif79-ri/hackernews
+module github.com/rezaif79-ri/graphqltutor1
 
 go 1.21.0
 
